@@ -1,7 +1,9 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import TaskB from "./components/TodoApp.vue";
+import TaskA from "./components/CounterApp.vue";
 </script>
 
 <template>
-  <HelloWorld />
+  <TaskB />
+  <TaskA />
 </template>

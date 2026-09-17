@@ -63,6 +63,11 @@ personList.value.push(father, mother, son)
          Namenskonvention: im Template kebab-case ("person-added"),
          in defineEmits camelCase ("personAdded") - Vue wandelt automatisch um. -->
     <person-form @person-added="addPerson"></person-form>
+   <button type="button" class="counter" @click="count++">
+      Count is {{ count }}
+    </button>
+
+
 </template>
 
 <style scoped>
