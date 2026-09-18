@@ -30,6 +30,7 @@ const todos = ref<Todo[]>([
   },
 ])
 
+/*
 const filteredTodos = computed(() => {
   if (filter.value == "All") {
     return [...todos.value]
@@ -42,6 +43,20 @@ const filteredTodos = computed(() => {
     return todos.value.filter(todo => !todo.done)
   }
 })
+
+*/
+
+const filteredTodos = computed(() => {
+  if (filter.value === "ALL") {
+    return todos.value;
+  }
+
+  if (filter.value === "OPEN") {
+    return todos.value.filter(todo => !todo.done);
+  }
+
+  return todos.value.filter(todo => todo.done);
+});
 
 function addTodo(){
   todos.value.push({id: Date.now(), text: newTodo.value, done: false})
@@ -73,6 +88,13 @@ function toggleTodo(id: number){
     <div>
       <input type="text" @keyup.enter="addTodo" v-model="newTodo">
     </div>
+
+    <div>
+      <button @click="filter = 'ALL'">Alle</button>
+      <button @click="filter = 'OPEN'">Offen</button>
+      <button @click="filter = 'DONE'">Erledigt</button>
+    </div>
+
   </section>
 
 </template>
