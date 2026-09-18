@@ -1,6 +1,5 @@
 //Liste rendern
 <script setup lang="ts">
-import {ref} from 'vue';
 import type {Todo} from "../models/todo.ts";
 import TodoItem from './TodoItem.vue';
 
