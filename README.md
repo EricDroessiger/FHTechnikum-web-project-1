@@ -1,4 +1,6 @@
-# Vue 3 + Vite
+# Vue 3 + Vite Todo List
+
+**How to:**
 
 1. Execute "npm install"
 2. Execute "npm run dev"
