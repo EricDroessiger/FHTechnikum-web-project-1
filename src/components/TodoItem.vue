@@ -26,7 +26,7 @@ function deleteTodo(){
 <template>
   <div>
     <p>
-      <input type="checkbox" name="id" :checked="props.todo.done" @toggle="$emit('toggle', props.todo.id)"> 
+      <input type="checkbox" name="id" :checked="props.todo.done" @change="$emit('toggle', props.todo.id)"> 
       {{ props.todo.text }}
       <button type="button" @click="deleteTodo">Löschen</button>
     </p>

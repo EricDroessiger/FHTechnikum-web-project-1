@@ -5,46 +5,29 @@ import {computed, ref} from 'vue';
 import type {Todo} from "../models/todo.ts";
 import TodoList from "./TodoList.vue";
 
-const filter = ref("All")
+const filter = ref("ALL")
 
-const newTodo = ref('')
+const newTodo = ref("")
 
-// todos als reaktive Vue funktion definieren
-// Array aus Todo Objekten erstellen
-// Füllen des Arrays per Hand
+// Beispiel Array
 const todos = ref<Todo[]>([
   {
     id: 1,
-    text: 'Vue-Komponenten verstehen',
+    text: "Text1",
     done: false,
   },
   {
     id: 2,
-    text: 'Aufgabe B fertigstellen',
+    text: "Text2",
     done: false,
   },
   {
     id: 3,
-    text: 'README schreiben',
+    text: "Text3",
     done: true,
   },
 ])
 
-/*
-const filteredTodos = computed(() => {
-  if (filter.value == "All") {
-    return [...todos.value]
-  }
-  else if(filter.value = "OPEN")
-  {
-    return todos.value.filter(todo => todo.done)
-  }
-  else {
-    return todos.value.filter(todo => !todo.done)
-  }
-})
-
-*/
 
 const filteredTodos = computed(() => {
   if (filter.value === "ALL") {
@@ -59,7 +42,17 @@ const filteredTodos = computed(() => {
 });
 
 function addTodo(){
-  todos.value.push({id: Date.now(), text: newTodo.value, done: false})
+  const text = newTodo.value.trim() 
+
+  if (text ===''){
+    return
+  }
+
+  todos.value.push({
+    id: Date.now(), text: newTodo.value, done: false
+  })
+
+  newTodo.value =''
 }
 
 function toggleTodo(id: number){
@@ -75,26 +68,31 @@ function toggleTodo(id: number){
   todos.value = todos.value.filter(todo => todo.id !== id);
   }
 
-// oder todos.value.length +1
 </script>
 
 
-// hier dann filtered todos anzeigen
-
+// Gefilterte Todos
 <template>
-  <section id="center">
+  <section id="list">
     <h1>Meine Todos</h1>
-    <TodoList :todos="filteredTodos" @toggle="toggleTodo" @delete="deleteTodo"/>
+
+    <div id="filter">
+      <button class="filter-button" :class="{ active: filter === 'ALL'}" @click="filter = 'ALL'">Alle</button>
+      <button class="filter-button" :class="{ active: filter === 'OPEN'}" @click="filter = 'OPEN'">Offen</button>
+      <button class="filter-button" :class="{ active: filter === 'DONE'}" @click="filter = 'DONE'">Erledigt</button>
+    </div>
+
     <div>
+      <p>Neue Todo:</p>
       <input type="text" @keyup.enter="addTodo" v-model="newTodo">
     </div>
 
-    <div>
-      <button @click="filter = 'ALL'">Alle</button>
-      <button @click="filter = 'OPEN'">Offen</button>
-      <button @click="filter = 'DONE'">Erledigt</button>
-    </div>
+    <TodoList :todos="filteredTodos" @toggle="toggleTodo" @delete="deleteTodo"/>
+
+    
 
   </section>
 
 </template>
+
+
