@@ -1,18 +1,25 @@
 //Liste rendern
 <script setup lang="ts">
+import {ref} from 'vue';
 import type {Todo} from "../models/todo.ts";
+import TodoItem from './TodoItem.vue';
 
-interface Props{
-  todos: Todo[]
-}
+const props = defineProps({
+  todos: {
+    type: Array as () => Todo[],
+    required: true,
+  },
+});
 
-const props = defineProps<Props>()
+const emit = defineEmits<{
+  (event: "toggle", id: number): void;
+  (event: "delete", id: number): void;
+}>();
+
 </script>
 
 <template>
-  <ul>
-    <li v-for="todo in props.todos" :key="todo.id">
-      {{ todo.text }} — {{ todo.done ? 'erledigt' : 'offen' }}
-    </li>
-  </ul>
+  <div>
+    <TodoItem v-for="item in props.todos" :key="item.id" :todo="item" @toggle="emit('toggle', $event)" @delete="emit('delete', $event)"/>
+  </div>
 </template>

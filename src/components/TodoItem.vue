@@ -1,32 +1,35 @@
 //einzelnes Todo mit Checkbox
 <script setup lang="ts">
-import type {Todo} from "../models/todo.ts";
+import { Todo } from "../models/todo";
 
-interface Props{
-  todo: Todo
-}
+const props = defineProps({
+  todo: {
+    type: Object as () => Todo,
+    required: true,
+  },
+});
 
-const props = defineProps<Props>()
 
+//Komponente kann toggle und delete Events senden und geben die ID des todos mit
 const emit = defineEmits<{
-  (event: 'toggle', id: number): void
-}>()
+  (event: "toggle", id: number): void;
+  (event: "delete", id: number): void;
+}>();
 
-function toggleTodo() {
-  emit('toggle', props.todo.id)
+function deleteTodo(){
+  emit("delete", props.todo.id);
 }
+
 </script>
 
+//Toggle an die Liste weiter hoch geben
 <template>
-  <li>
-    <label>
-      <input
-        type="checkbox"
-        :checked="props.todo.done"
-        @change="toggleTodo"
-      />
-
+  <div>
+    <p>
+      <input type="checkbox" name="id" :checked="props.todo.done" @toggle="$emit('toggle', props.todo.id)"> 
       {{ props.todo.text }}
-    </label>
-  </li>
+      <button type="button" @click="deleteTodo">Löschen</button>
+    </p>
+  </div>
+  
 </template>

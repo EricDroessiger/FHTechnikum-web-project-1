@@ -3,7 +3,7 @@
 <script setup lang="ts">
 import {computed, ref} from 'vue';
 import type {Todo} from "../models/todo.ts";
-import TodoList from "./TodoList2.vue";
+import TodoList from "./TodoList.vue";
 
 const filter = ref("All")
 
@@ -54,11 +54,11 @@ function toggleTodo(id: number){
       todo.done = !todo.done
     }
   });
-
-
-  // zum löschen: [...todos.value.filter(todo => todo.id != id)]
-
 }
+
+  function deleteTodo(id: number) {
+  todos.value = todos.value.filter(todo => todo.id !== id);
+  }
 
 // oder todos.value.length +1
 </script>
@@ -69,7 +69,7 @@ function toggleTodo(id: number){
 <template>
   <section id="center">
     <h1>Meine Todos</h1>
-    <TodoList :todos="filteredTodos" @toggle="toggleTodo"/>
+    <TodoList :todos="filteredTodos" @toggle="toggleTodo" @delete="deleteTodo"/>
     <div>
       <input type="text" @keyup.enter="addTodo" v-model="newTodo">
     </div>
