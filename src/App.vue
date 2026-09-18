@@ -1,7 +1,7 @@
 <script setup>
-import TaskA from "./components/CounterApp.vue";
+import TaskB from "./components/TodoApp.vue";
 </script>
 
 <template>
-  <TaskA />
+  <TaskB />
 </template>
