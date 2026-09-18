@@ -76,7 +76,7 @@ function toggleTodo(id: number){
   <section id="list">
     <h1>Meine Todos</h1>
 
-    <div id="filter">
+    <div>
       <button class="filter-button" :class="{ active: filter === 'ALL'}" @click="filter = 'ALL'">Alle</button>
       <button class="filter-button" :class="{ active: filter === 'OPEN'}" @click="filter = 'OPEN'">Offen</button>
       <button class="filter-button" :class="{ active: filter === 'DONE'}" @click="filter = 'DONE'">Erledigt</button>

@@ -275,7 +275,7 @@ code {
   border-top: 1px solid var(--border);
 
   p {
-    text-align: right;
+    text-align: left;
   }
 }
 
